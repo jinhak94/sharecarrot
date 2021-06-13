@@ -12,8 +12,12 @@
 		hegiht:50px;
 		width:50px;
 	}
+	#jjimTable{
+		width:80%;
+		margin-left: 50px;
+	}
 </style>
-<table class="table">
+<table class="table" id="jjimTable">
   <thead>
     <tr>
       <th scope="col">상품사진</th>

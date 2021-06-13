@@ -121,14 +121,12 @@
   display: flex;
   flex-wrap: wrap;
   background-color: white;
-  /* justify-content: space-between; */
 }
 .item {
   position: relative;
   width: calc(20% - 20px);
   height: 276px;
   color: rgb(33, 33, 33);
-  /* border: 1px solid yellow; */
   margin: 10px;
   cursor: pointer;
 }

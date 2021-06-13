@@ -357,14 +357,14 @@ public class MemberController {
             return "/member/checkPassword";
     	}
     	log.info("회원정보 = {}", member);
-    	//아 암호화처리..
+    	//넘어온 비밀번호 암호화
     	String encodedPassword = bcryptPasswordEncoder.encode(tempPassword);
     	member.setMemberPassword(encodedPassword);
     	
     	//조회된 회원의 비밀번호를 임시비밀번호로 update
     	int result = memberService.memberPasswordUpdate(member);
     	
-    	//임시비밀번호 메일로 전송 -> 그럼 이 메소드는 메일로 비밀번호만 전달??
+    	//임시비밀번호 메일로 전송
     	
     	 /* 이메일 보내기 */
         String host = "smtp.naver.com";

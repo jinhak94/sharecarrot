@@ -112,7 +112,7 @@
 				</div>
 			</div>
 		</c:when>	
-		<c:when test="${not empty msg}">
+		<c:when test="${not empty msg3}">
 			<!-- 성공한 경우 -->
 			<div class="result-wrapper">
 				<div class="password-update-result">

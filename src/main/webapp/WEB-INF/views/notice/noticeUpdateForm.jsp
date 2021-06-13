@@ -28,6 +28,9 @@ function noticeValidate(){
 	return true;
 }
 
+function cancel(){
+	location.href=	"${pageContext.request.contextPath}/notice/noticeList.do";
+}
 </script>
 <div id="board-container" class="mx-auto text-center">
 
@@ -61,7 +64,7 @@ function noticeValidate(){
 					<input type="submit" class="btn btn-outline-secondary" style="width:150px;" value="수정" >
 				</td>
 				<td>
-					<input type="button" class="btn btn-outline-secondary" style="width:150px;" value="취소" >
+					<input type="button" onclick="cancel();" class="btn btn-outline-secondary" style="width:150px;" value="취소" ></td>
 				</td>
 			</tr>
 		</table>

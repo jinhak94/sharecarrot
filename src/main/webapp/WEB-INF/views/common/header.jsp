@@ -120,7 +120,7 @@
                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/board/boardList.do"><spring:message code="header.nav.board" /></a></li>
                     </sec:authorize>
                     <sec:authorize access="isAuthenticated()">
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/board/boardList.do?memberId=<sec:authentication property='principal.username'/>"><spring:message code="header.nav.board" /></a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/board/boardList.do"><spring:message code="header.nav.board" /></a></li>
                     </sec:authorize>
  					<sec:authorize access="hasRole('ROLE_ADMIN')">
 	                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/report/reportList.do"><spring:message code="header.nav.report" /></a></li>

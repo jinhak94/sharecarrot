@@ -235,13 +235,11 @@ var totalJjim = 0;
 	  location.href = '${pageContext.request.contextPath}/jjim/jjimList.do';
   }
 
-  // 뭐해야하지
   const recentList = (productInfo) =>{
     const recent_div = document.querySelector("#recent-content");
     
     const recent_img = document.createElement("div");
     recent_img.className = "recent-img";
-    // recent_img.src = "${pageContext.request.contextPath}/resources/upload/product/" + productInfo.productImg;
     recent_img.style.backgroundImage="url(${pageContext.request.contextPath}/resources/upload/product/" + productInfo.productImg + ")";
     recent_img.width = 50;
     recent_img.height = 50;
@@ -270,16 +268,6 @@ var totalJjim = 0;
     
 
     recent_div.appendChild(recent_img);
-
-
-
-
-    // <div class="recent-detail-area">
-    //   <div class="recent-detail-div">
-    //     <div class="recent-detail-name">나이키 모나크에어 올블랙 255</div>
-    //     <div class="recent-detail-price">30,000</div>
-    //   </div>
-    // </div>
   }
   
   // 로컬스토리지에 있는 최근본상품1~3 값을 불러온다.(JSON)
@@ -287,7 +275,6 @@ var totalJjim = 0;
   let product_count = 0;
   for(let i = 1; i <= 3; i++){
     const productInfoJSON = localStorage.getItem("최근본상품_" + i);
-    // console.log(productInfo);
 
     // 키값을 통해 불러온 값이 없으면 멈춰!
     if(!productInfoJSON) {
@@ -307,8 +294,5 @@ var totalJjim = 0;
   if(product_count > 0) {
     document.querySelector("#recent-no-content").style.display = "none";
   }
-  
-
-
   
 </script>

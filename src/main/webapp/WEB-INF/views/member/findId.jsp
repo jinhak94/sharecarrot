@@ -40,13 +40,13 @@
 		justify-content: space-evenly;
 		align-items: center;
 	}
-
 	.info-input input {
 		width: 300px;
 		height: 50px;
 		border: none;
 		border-bottom: 2px solid #f7863b;
 	}
+
 	.btn-search {
   display: inline-flex;
   align-items: center;
@@ -93,11 +93,9 @@
 		</div>
 		<div class="info-input">
 			<div class="name-space">
-				<!-- <label for="name">🤦‍♂️</label> -->
 				<input type="text" name="memberName" id="memberName" placeholder="이름을 입력하세요">
 			</div>
-			<div class="email space">
-				<!-- <label for="email">📩</label> -->
+			<div class="email-space">
 				<input type="email" name="email" id="email" placeholder="이메일주소를 입력하세요">
 			</div>
 		</div>

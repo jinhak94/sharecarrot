@@ -94,15 +94,12 @@
 		</div>
 		<div class="info-input">
 			<div class="old-password-space">
-				<!-- <label for="name">🤦‍♂️</label> -->
 				<input type="password" name="oldPassword" id="old-password" placeholder="현재 비밀번호">
 			</div>
 			<div class="new-password-space">
-				<!-- <label for="password">📩</label> -->
 				<input type="password" name="newPassword" id="new-password"placeholder="변경할 비밀번호">
 			</div>
 			<div class="new-password-confirm-space">
-				<!-- <label for="password">📩</label> -->
 				<input type="password" name="new-password-chk" id="new-password-chk" placeholder="변경할 비밀번호 확인">
 			</div>
             <div>

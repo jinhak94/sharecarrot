@@ -9,22 +9,14 @@ const recentProduct = {
   productPrice
 }
 
-
-// 최근본상품1  |  4
-// 최근본상품2  |  3
-// 최근본상품3  |  2
-
-// tempSave   |  2
-// recent     |  2
-
 let tempSave = JSON.stringify(recentProduct);
 for(let i = 1; i <= 3; i++){
   recent = localStorage.getItem("최근본상품_" + i);
-  if(recent == null){ // 없으면 넣는거
+  if(recent == null){ // 없으면 최근본상품 추가
     localStorage.setItem("최근본상품_" + i , tempSave);
     break;
   }
-  else {    // 잠깐 빼둔걸로 갈아끼는거
+  else { 
     localStorage.setItem("최근본상품_" + i, tempSave);
     tempSave = recent; 
 

@@ -81,33 +81,30 @@
 	}
 	
 	$(document).ready(function(){
-		var boardListCnt = $(boardList).children().length;
-		var boardCategory = '<c:out value="${param.boardCategory}"/>';
-		var locCode = '<c:out value="${param.locCode}"/>';
+		var boardListCnt = $(boardList).children().length;             // 전체 사이즈
+		var boardCategory = '<c:out value="${param.boardCategory}"/>'; // 현재 파라미터에 있는 카테고리
+		var locCode = '<c:out value="${param.locCode}"/>';             //    ''           지역코드
 		var cPage = 1;
 		const numPerPage = 5;
 		
-		readBoardList(cPage++);
+		readBoardList(cPage++);                                        // 페이지 요청시
 		
-		$(searchMore).click(function(){
+		$(searchMore).click(function(){                                // 더보기 버튼
 			readBoardList(cPage++);
 		});
 
-		$("#selectLocation").change(function(e){
+		$("#selectLocation").change(function(e){                       // 지역코드 변경시
 			var locCode = e.target.value;
 			var url = boardCategory == null || boardCategory == '' ? "" : "&boardCategory="+boardCategory;
-			console.log(url);
 			location.href="${pageContext.request.contextPath}/board/boardList.do?locCode=" + locCode + url;
-			/* readBoardList(null, locCode); */
 		});
 		
-		$("#selectHottest").change(function(e){
+		$("#selectHottest").change(function(e){                        // 최신순,인기순 선택시
 			const code = e.target.value;
 			readBoardList(1, code);
 		});
 		
-		function readBoardList(index, code){
-			console.log("index = " + index);
+		function readBoardList(index, code){                          // board 데이터 비동기 요청
 			$.ajax({
 				type: "GET",
 				dataType : "json",
@@ -203,12 +200,16 @@
 						</c:forEach>
 						
 						if(likeBool){ <%--좋아요를 누른경우--%>
-							html += `<tr><td colspan='5'  class='table-light'><img id='likeBtn\${elem.boardNo}' class='likeBtn' src='${pageContext.request.contextPath}/resources/images/board/like.png' onclick="likeBtnTrigger('like\${elem.boardNo}', 'likeCntH\${elem.boardNo}', 'likeCnt\${elem.boardNo}', '\${elem.boardNo}', 'likeBtn\${elem.boardNo}');"/><span class='badge bg-dark rounded-pill ml-3' id='likeCnt\${elem.boardNo}'> \${elem.boardLike} 명이 좋아합니다.</span></td></tr>`;
+							html += `<tr><td colspan='5'  class='table-light'><img id='likeBtn\${elem.boardNo}' class='likeBtn' 
+								src='${pageContext.request.contextPath}/resources/images/board/like.png' onclick="likeBtnTrigger('like\${elem.boardNo}', 'likeCntH\${elem.boardNo}', 'likeCnt\${elem.boardNo}', '\${elem.boardNo}', 'likeBtn\${elem.boardNo}');"/>
+								<span class='badge bg-dark rounded-pill ml-3' id='likeCnt\${elem.boardNo}'> \${elem.boardLike} 명이 좋아합니다.</span></td></tr>`;
 							html += `<input type='hidden' id='likeCntH\${elem.boardNo}' value='\${elem.boardLike}'/>`;
 							html += `<input type='hidden' id='like\${elem.boardNo}' value='1'>`;
 							
 						} else { <%-- 안누른경우--%>
-							html += `<tr><td colspan='5'  class='table-light'><img id='likeBtn\${elem.boardNo}' class='likeBtn' src='${pageContext.request.contextPath}/resources/images/board/nolike.png' onclick="likeBtnTrigger('like\${elem.boardNo}', 'likeCntH\${elem.boardNo}',  'likeCnt\${elem.boardNo}', '\${elem.boardNo}', 'likeBtn\${elem.boardNo}');"/><span class='badge bg-dark rounded-pill ml-3' id='likeCnt\${elem.boardNo}'> \${elem.boardLike} 명이 좋아합니다.</span></td></tr>`;
+							html += `<tr><td colspan='5'  class='table-light'><img id='likeBtn\${elem.boardNo}' class='likeBtn' 
+								src='${pageContext.request.contextPath}/resources/images/board/nolike.png' onclick="likeBtnTrigger('like\${elem.boardNo}', 'likeCntH\${elem.boardNo}',  'likeCnt\${elem.boardNo}', '\${elem.boardNo}', 'likeBtn\${elem.boardNo}');"/>
+								<span class='badge bg-dark rounded-pill ml-3' id='likeCnt\${elem.boardNo}'> \${elem.boardLike} 명이 좋아합니다.</span></td></tr>`;
 							html += `<input type='hidden' id='likeCntH\${elem.boardNo}' value='\${elem.boardLike}'/>`;
 							html += `<input type='hidden' id='like\${elem.boardNo}' value='-1'>`;
 						}
@@ -275,11 +276,11 @@
 			return;
 		</sec:authorize>
 		
-		var hidden = $(`#\${likeHiddenId}`);
-		var cntSpan = $(`#\${likeCntSpan}`);
-		var likeCntH = $(`#\${likeCntH}`);
-		var likeCntHVal = Number(likeCntH.val());
-		var likeBtnImg = $(`#\${likeBtn}`);
+		var hidden = $(`#\${likeHiddenId}`); // 1혹은 0 눌렀는지 안눌렀는지를 확인할 flag
+		var cntSpan = $(`#\${likeCntSpan}`); // "??명이 좋아요를 눌렀습니다" 를 표시할 영역
+		var likeCntH = $(`#\${likeCntH}`); // 해당 게시물의 좋아요 갯수를 표시할 hidden input tag
+		var likeCntHVal = Number(likeCntH.val()); // 해당 게시물의 좋아요 갯수
+		var likeBtnImg = $(`#\${likeBtn}`); // 좋아요를 눌렀을때와 안눌렀을때 다르게 표시할 이미지 영역
 		
 		
 		var count = 0;
@@ -337,8 +338,8 @@
 			return;
 		</sec:authorize>
 		
-		const text = $(`#\${textId}`);
-		const boardContent = text.val();
+		const text = $(`#\${textId}`);		//사용자가 입력한 댓글영역
+		const boardContent = text.val();	// 댓글
 		
 		//댓글 입력안했을때 조기리턴
 		if(!boardContent) {

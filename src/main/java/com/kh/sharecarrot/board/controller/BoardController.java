@@ -3,6 +3,7 @@ package com.kh.sharecarrot.board.controller;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 import java.io.File;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -47,8 +48,11 @@ public class BoardController {
 	private UtilsService utilsService;
 
 	@GetMapping("/boardList.do")
-	public void boardList(Model model, @RequestParam(defaultValue="") String memberId) {
+	public void boardList(Model model, Principal principal) {
 		List<BoardLike> boardLikeList = null;
+		
+		//로그인을 한경우
+		String memberId = principal.getName();
 		if(!(memberId == null || memberId.equals(""))) {
 			boardLikeList = boardService.selectBoardLikeList(memberId);
 		}
@@ -63,10 +67,7 @@ public class BoardController {
 	@GetMapping("/searchBoardList.do")
 	public List<Board> searchBoardList(@RequestParam(defaultValue = "1") int cPage, int numPerPage,  
 					@RequestParam(defaultValue =  "") String boardCategory, @RequestParam(defaultValue = "") String locCode, @RequestParam(defaultValue = "") String code) {
-		
-		//locCode 공백제거
-		locCode = locCode.trim();
-		
+
 		Map<String, Object> param = new HashMap<>();
 		param.put("cPage", cPage);
 		param.put("numPerPage", numPerPage);
@@ -173,9 +174,9 @@ public class BoardController {
 			}
 			
 			board.setBoardImageList(boardImgList);
-			if(boardImgId != null) {
-				int reuslt = boardService.updateBorad(board, boardImgId);				
-			}
+			
+			int reuslt = boardService.updateBorad(board, boardImgId);				
+			
 				
 			redirectAttr.addFlashAttribute("msg", "게시글 수정이 완료되었습니다.");
 			
@@ -227,10 +228,7 @@ public class BoardController {
 		param.put("likeCnt", likeCnt);
 		param.put("memberId", memberId);
 		param.put("likeBool", likeBool);
-		
-		log.info("likeCnt = {}", likeCnt);
-		log.info("boardNo = {} -- {}", boardNo, memberId);
-		
+
 		int result = boardService.updateBoardLike(param);
 	}
 	

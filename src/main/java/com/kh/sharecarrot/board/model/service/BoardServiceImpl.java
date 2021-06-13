@@ -71,8 +71,10 @@ public class BoardServiceImpl implements BoardService{
 		}
 		
 		//3. boardImageId 삭제
-		List<String> list = Arrays.asList(boardImgId);
-		if(!list.isEmpty()) {
+		List<String> list = null;
+		if(boardImgId != null)
+			list = Arrays.asList(boardImgId);
+		if(list != null) {
 			for(String id : list) {
 				result = boardDao.deleteBoardImg(id);
 			}
